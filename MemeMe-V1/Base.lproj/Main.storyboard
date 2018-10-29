@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="MemeMe_V1" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GHu-EC-Vua">
+                                <rect key="frame" x="0.0" y="75" width="375" height="672"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </imageView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NGU-0A-Fr6">
+                                <rect key="frame" x="0.0" y="747" width="375" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="3np-kk-y80"/>
+                                </constraints>
+                                <items>
+                                    <barButtonItem title="Choose Image" id="E7m-IG-C1G">
+                                        <connections>
+                                            <action selector="selectImageFromAlbum:" destination="BYZ-38-t0r" id="Mqf-Gg-5Bh"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="YK9-rp-Dff"/>
+                                    <barButtonItem systemItem="camera" id="Lg8-kM-1Hp">
+                                        <connections>
+                                            <action selector="selectImageFromCamera:" destination="BYZ-38-t0r" id="sW3-TD-j5W"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="wYX-4V-zXZ"/>
+                                </items>
+                            </toolbar>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Top Text" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yHl-lU-AgV" userLabel="topTextField">
+                                <rect key="frame" x="40" y="124" width="295" height="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter Bottom Text" textAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="sxX-Ju-42o" userLabel="bottomTextField">
+                                <rect key="frame" x="40" y="700" width="295" height="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="allCharacters"/>
+                            </textField>
+                            <navigationBar contentMode="scaleToFill" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="r47-qo-XSQ">
+                                <rect key="frame" x="0.0" y="44" width="375" height="31"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <items>
+                                    <navigationItem title="MemeMe" id="N44-br-Sjr">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="LOY-hm-5SN">
+                                            <connections>
+                                                <action selector="shareMeme:" destination="BYZ-38-t0r" id="fCT-m2-7UU"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="refresh" id="vda-Pl-ytO">
+                                            <connections>
+                                                <action selector="resetMeme:" destination="BYZ-38-t0r" id="qm5-JZ-28P"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="r47-qo-XSQ" firstAttribute="trailing" secondItem="NGU-0A-Fr6" secondAttribute="trailing" id="4CE-gJ-UYe"/>
+                            <constraint firstItem="NGU-0A-Fr6" firstAttribute="top" secondItem="sxX-Ju-42o" secondAttribute="bottom" constant="30" id="51x-fs-YCt"/>
+                            <constraint firstItem="sxX-Ju-42o" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="yHl-lU-AgV" secondAttribute="trailing" id="5xh-2Y-PtD"/>
+                            <constraint firstItem="r47-qo-XSQ" firstAttribute="leading" secondItem="NGU-0A-Fr6" secondAttribute="leading" id="C8a-0q-MTr"/>
+                            <constraint firstItem="GHu-EC-Vua" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="Cqq-mk-cyb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yHl-lU-AgV" secondAttribute="trailing" constant="40" id="FzL-Ba-p5n"/>
+                            <constraint firstItem="GHu-EC-Vua" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H9Y-Vn-gWr"/>
+                            <constraint firstItem="GHu-EC-Vua" firstAttribute="top" secondItem="r47-qo-XSQ" secondAttribute="bottom" id="NDQ-L4-opw"/>
+                            <constraint firstItem="NGU-0A-Fr6" firstAttribute="centerX" secondItem="sxX-Ju-42o" secondAttribute="centerX" id="OUQ-aP-oTc"/>
+                            <constraint firstItem="GHu-EC-Vua" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="P1P-c7-f9Y"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="NGU-0A-Fr6" secondAttribute="bottom" constant="-13" id="S2v-pL-NC5"/>
+                            <constraint firstItem="sxX-Ju-42o" firstAttribute="leading" secondItem="yHl-lU-AgV" secondAttribute="leading" id="c5S-zd-Cpe"/>
+                            <constraint firstItem="NGU-0A-Fr6" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="fYy-CT-bXd"/>
+                            <constraint firstItem="yHl-lU-AgV" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="80" id="hvO-3w-2lb"/>
+                            <constraint firstItem="r47-qo-XSQ" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="qKr-qB-Htg"/>
+                            <constraint firstItem="yHl-lU-AgV" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="qjF-HE-AFG"/>
+                            <constraint firstItem="NGU-0A-Fr6" firstAttribute="top" secondItem="GHu-EC-Vua" secondAttribute="bottom" id="rXl-NC-Mqb"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="bottomTextField" destination="sxX-Ju-42o" id="ucV-9k-kzm"/>
+                        <outlet property="cameraButton" destination="Lg8-kM-1Hp" id="jsK-49-c1I"/>
+                        <outlet property="imageView" destination="GHu-EC-Vua" id="peX-fF-iNj"/>
+                        <outlet property="navigationBar" destination="r47-qo-XSQ" id="nXI-SV-OLf"/>
+                        <outlet property="shareButton" destination="LOY-hm-5SN" id="aoo-n5-J5X"/>
+                        <outlet property="toolbar" destination="NGU-0A-Fr6" id="nyX-r7-EHj"/>
+                        <outlet property="topTextField" destination="yHl-lU-AgV" id="Zgs-6u-yqk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="137.68115942028987" y="133.92857142857142"/>
+        </scene>
+    </scenes>
+</document>
