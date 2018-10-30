@@ -8,9 +8,9 @@
 
 import UIKit
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UITextFieldDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    
+    //MARK: meme object
     struct memeObject {
         var topText: String
         var bottomText: String
@@ -18,6 +18,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         var memeImage: UIImage
     }
     
+    //MARK: Views
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var cameraButton: UIBarButtonItem!
     @IBOutlet weak var shareButton: UIBarButtonItem!
@@ -29,6 +30,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     //MARK: Navigation Bar and Toolbar
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var toolbar: UIToolbar!
+    
+    //MARK: Custom Textfield delegate
+    let TextFieldDelegate = MemeTextFieldDelegate()
 
     //MARK: text Attributes
     let memeTextAttributes:[NSAttributedString.Key: Any] = [
@@ -37,22 +41,9 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         NSAttributedString.Key.font: UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!,
         NSAttributedString.Key.strokeWidth: -4.0]
     
+    //MARK: Placeholder Attributes
     let placeHolderTextAttributes:[NSAttributedString.Key: Any] = [
         NSAttributedString.Key.foregroundColor: UIColor.white]
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        topTextField.text = "TOP"
-        bottomTextField.text = "BOTTOM"
-        topTextField.delegate = self
-        bottomTextField.delegate = self
-        topTextField.defaultTextAttributes = memeTextAttributes
-        bottomTextField.defaultTextAttributes = memeTextAttributes
-        topTextField.attributedPlaceholder = NSAttributedString(string: "Enter Top Text", attributes: placeHolderTextAttributes)
-        bottomTextField.attributedPlaceholder = NSAttributedString(string: "Enter Bottom Text", attributes: placeHolderTextAttributes)
-        topTextField.textAlignment = .center
-        bottomTextField.textAlignment = .center
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -60,10 +51,25 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         shareButton.isEnabled = (imageView.image != nil)
         subscribeToKeyboardNotifications()
     }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        initializeTextField(textField: topTextField, initialText: "TOP", placeholderText: "Enter Top Text")
+        initializeTextField(textField: bottomTextField, initialText: "BOTTOM", placeholderText: "Enter Bottom Text")
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
+    }
+
+    //MARK: Initialize textField
+    func initializeTextField(textField: UITextField, initialText: String, placeholderText: String) {
+        textField.text = initialText
+        textField.delegate = TextFieldDelegate
+        textField.defaultTextAttributes = memeTextAttributes
+        textField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: placeHolderTextAttributes)
+        textField.textAlignment = .center
     }
     
     //MARK: subscribe keyboard notification
@@ -75,7 +81,6 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: unsubscribe keyboard notification
     func unsubscribeFromKeyboardNotifications() {
-        
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -99,30 +104,19 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         let keyboardSize = userInfo![UIResponder.keyboardFrameEndUserInfoKey] as! NSValue // of CGRect
         return keyboardSize.cgRectValue.height
     }
-    
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        textField.text = ""
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    //MARK: select from album
-    @IBAction func selectImageFromAlbum(_ sender: Any) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        imagePicker.sourceType = .photoLibrary
-        imagePicker.allowsEditing = true
-        present(imagePicker, animated: true, completion: nil)
-    }
 
-    //MARK: select from camera
-    @IBAction func selectImageFromCamera(_ sender: Any) {
+    //MARK: select from album
+    @IBAction func selectImage(_ sender: UIBarButtonItem) {
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
-        imagePicker.sourceType = .camera
+
+        if (sender.tag == 0) {
+            imagePicker.sourceType = .photoLibrary
+            imagePicker.allowsEditing = true
+        } else {
+            imagePicker.sourceType = .camera
+        }
+
         present(imagePicker, animated: true, completion: nil)
     }
     
@@ -146,18 +140,21 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         bottomTextField.text = "BOTTOM"
         shareButton.isEnabled = false
     }
-
+    
     func saveMeme(memeImage: UIImage) {
         _ = memeObject(
             topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: imageView.image!, memeImage: memeImage)
     }
     
+    //MARK: show/hide Bars
     func hideBars(hide: Bool) {
         navigationBar.isHidden = hide
         toolbar.isHidden = hide
     }
     
+    //MARK: Generate meme
     func generateMemeImage() -> UIImage {
+        
         //hide top and bottom bars
         hideBars(hide: true)
 
@@ -173,6 +170,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
         return memeImage
     }
     
+    //MARK: Share Meme
     @IBAction func shareMeme(_ sender: Any) {
         let memeImage = generateMemeImage()
         let shareController = UIActivityViewController(activityItems: [memeImage], applicationActivities: nil)
@@ -185,4 +183,3 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     }
     
 }
-

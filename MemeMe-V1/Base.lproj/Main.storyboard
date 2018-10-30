@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.15" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -29,13 +29,13 @@
                                 <items>
                                     <barButtonItem title="Choose Image" id="E7m-IG-C1G">
                                         <connections>
-                                            <action selector="selectImageFromAlbum:" destination="BYZ-38-t0r" id="Mqf-Gg-5Bh"/>
+                                            <action selector="selectImage:" destination="BYZ-38-t0r" id="Eqi-wF-kpX"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="YK9-rp-Dff"/>
-                                    <barButtonItem systemItem="camera" id="Lg8-kM-1Hp">
+                                    <barButtonItem tag="1" systemItem="camera" id="Lg8-kM-1Hp">
                                         <connections>
-                                            <action selector="selectImageFromCamera:" destination="BYZ-38-t0r" id="sW3-TD-j5W"/>
+                                            <action selector="selectImage:" destination="BYZ-38-t0r" id="y86-7P-gnF"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem width="15" style="plain" systemItem="fixedSpace" id="wYX-4V-zXZ"/>
