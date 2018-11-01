@@ -127,7 +127,12 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavig
     
     //MARK: userSelectImage
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        
+        if let image = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+            imageView.image = image
+            shareButton.isEnabled = true
+        }
+        else if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             imageView.image = image
             shareButton.isEnabled = true
         }
